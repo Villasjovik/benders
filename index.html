@@ -458,40 +458,58 @@ box-shadow:
 .sec-sublead{max-width:580px;margin:-20px auto 48px;font-size:14px;line-height:1.75;color:var(--muted);text-align:center}
 @media(max-width:700px){.sec-sublead{font-size:13px;margin-bottom:36px}}
 
-/* RÄCKVIDD-BOOST TOGGLE */
-.ads-toggle{display:flex;justify-content:center;margin:-12px auto 44px;max-width:580px}
-.ads-pill{display:inline-flex;align-items:center;gap:16px;padding:14px 26px;
-  background:rgba(212,168,75,.05);border:1px solid rgba(212,168,75,.28);border-radius:100px;
+/* RÄCKVIDD-BOOST TOGGLE — Dynamic Island-tema + iOS-style switch */
+.ads-toggle{display:flex;justify-content:center;margin:-12px auto 44px;max-width:640px}
+.ads-pill{display:inline-flex;align-items:center;gap:16px;padding:13px 26px;
+  background:rgba(26,38,30,.62);
+  backdrop-filter:blur(28px) saturate(1.3);-webkit-backdrop-filter:blur(28px) saturate(1.3);
+  border:1px solid rgba(212,168,75,.18);border-radius:100px;
   color:var(--ink);font-family:'Inter',sans-serif;cursor:pointer;
-  transition:background .4s var(--ease),border-color .4s var(--ease),transform .25s var(--ease),box-shadow .4s var(--ease);
-  position:relative}
-.ads-pill:hover{background:rgba(212,168,75,.1);border-color:rgba(212,168,75,.5);transform:translateY(-1px);
-  box-shadow:0 8px 28px rgba(0,0,0,.3),0 0 24px rgba(212,168,75,.08)}
+  transition:background .5s var(--ease),border-color .5s var(--ease),transform .25s var(--ease),box-shadow .5s var(--ease);
+  position:relative;
+  box-shadow:0 4px 24px rgba(0,0,0,.35),0 0 0 1px rgba(0,0,0,.12)}
+.ads-pill:hover{background:rgba(26,38,30,.85);border-color:rgba(212,168,75,.35);transform:translateY(-1px);
+  box-shadow:0 8px 40px rgba(0,0,0,.45),0 0 50px rgba(212,168,75,.08)}
 .ads-pill:active{transform:translateY(0)}
-.ads-switch{width:38px;height:22px;background:rgba(255,255,255,.08);border-radius:100px;position:relative;
-  transition:background .4s var(--ease);flex-shrink:0;border:1px solid rgba(212,168,75,.18)}
-.ads-switch::after{content:'';position:absolute;top:2px;left:2px;width:16px;height:16px;
-  background:var(--gold);border-radius:50%;transition:transform .4s cubic-bezier(.34,1.56,.64,1),background .3s;
-  box-shadow:0 2px 6px rgba(0,0,0,.4)}
-.ads-text{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left}
-.ads-label{font-size:13px;font-weight:600;letter-spacing:.04em;color:var(--ink)}
-.ads-detail{font-size:11px;color:var(--muted);letter-spacing:.02em}
-.ads-detail-active{display:none;color:var(--gold)}
-.ads-pill[aria-pressed="true"]{background:rgba(212,168,75,.16);border-color:rgba(212,168,75,.55);
-  box-shadow:0 4px 18px rgba(0,0,0,.25),0 0 36px rgba(212,168,75,.12)}
-.ads-pill[aria-pressed="true"] .ads-switch{background:rgba(212,168,75,.55);border-color:rgba(212,168,75,.75)}
-.ads-pill[aria-pressed="true"] .ads-switch::after{transform:translateX(16px);background:var(--ink)}
-.ads-pill[aria-pressed="true"] .ads-detail-default{display:none}
-.ads-pill[aria-pressed="true"] .ads-detail-active{display:inline}
+
+/* iOS-style switch: grey track när av, iOS-grön när på */
+.ads-switch{width:48px;height:28px;background:rgba(120,120,128,.32);border-radius:100px;
+  position:relative;transition:background-color .3s ease;flex-shrink:0;border:none}
+.ads-switch::after{content:'';position:absolute;top:2px;left:2px;width:24px;height:24px;
+  background:#fff;border-radius:50%;
+  transition:transform .35s cubic-bezier(.34,1.56,.64,1);
+  box-shadow:0 3px 8px rgba(0,0,0,.18),0 3px 1px rgba(0,0,0,.06),0 0 0 .5px rgba(0,0,0,.04)}
+.ads-pill[aria-pressed="true"] .ads-switch{background:#34C759}
+.ads-pill[aria-pressed="true"] .ads-switch::after{transform:translateX(20px)}
+
+.ads-text{display:flex;flex-direction:column;align-items:flex-start;gap:3px;text-align:left}
+.ads-label{font-size:13px;font-weight:600;letter-spacing:.04em;color:var(--ink);
+  transition:color .35s var(--ease)}
 .ads-pill[aria-pressed="true"] .ads-label{color:var(--gold)}
+
+/* Smooth size-animation via grid-template-columns (Dynamic Island-style expand/contract) */
+.ads-detail-wrap{display:grid;grid-template-columns:1fr 0fr;align-items:center;
+  transition:grid-template-columns .55s cubic-bezier(.16,1,.3,1)}
+.ads-pill[aria-pressed="true"] .ads-detail-wrap{grid-template-columns:0fr 1fr}
+.ads-detail{grid-row:1;white-space:nowrap;overflow:hidden;min-width:0;
+  font-size:11px;letter-spacing:.02em;color:var(--muted);
+  transition:opacity .35s var(--ease) .1s,color .35s var(--ease)}
+.ads-detail-default{grid-column:1;opacity:1}
+.ads-detail-active{grid-column:2;opacity:0;color:var(--gold)}
+.ads-pill[aria-pressed="true"] .ads-detail-default{opacity:0;transition-delay:0s}
+.ads-pill[aria-pressed="true"] .ads-detail-active{opacity:1;transition-delay:.15s}
+
 .price-total.boost-pulse{animation:boostPulse .9s var(--ease)}
 .price-orig.boost-pulse{animation:boostPulseSub .9s var(--ease)}
 @keyframes boostPulse{0%{transform:scale(1)}40%{transform:scale(1.04);text-shadow:0 0 24px rgba(212,168,75,.5)}100%{transform:scale(1)}}
 @keyframes boostPulseSub{0%,100%{opacity:.28}50%{opacity:.55}}
 @media(max-width:560px){
-  .ads-pill{padding:12px 18px;gap:12px}
+  .ads-pill{padding:11px 18px;gap:12px}
   .ads-label{font-size:12px}
   .ads-detail{font-size:10px}
+  .ads-switch{width:44px;height:26px}
+  .ads-switch::after{width:22px;height:22px}
+  .ads-pill[aria-pressed="true"] .ads-switch::after{transform:translateX(18px)}
 }
 .price-includes{margin-top:32px;display:flex;flex-direction:column;gap:10px;text-align:left}
 .pi{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:rgba(242,237,228,.65);line-height:1.5}
@@ -935,8 +953,10 @@ position:relative;overflow:hidden;transition:color .35s}
         <span class="ads-switch" aria-hidden="true"></span>
         <span class="ads-text">
           <span class="ads-label">Räckvidd-boost</span>
-          <span class="ads-detail ads-detail-default">+10 000 kr för 100 000 extra visningar via Meta&nbsp;Ads</span>
-          <span class="ads-detail ads-detail-active">Aktiv &middot; 100 000 extra visningar via Meta&nbsp;Ads</span>
+          <span class="ads-detail-wrap">
+            <span class="ads-detail ads-detail-default">+10 000 kr för 100 000 extra visningar via Meta&nbsp;Ads</span>
+            <span class="ads-detail ads-detail-active">Aktiv &middot; 100 000 extra visningar via Meta&nbsp;Ads</span>
+          </span>
         </span>
       </button>
     </div>
