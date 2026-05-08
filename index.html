@@ -222,7 +222,7 @@ max-width:900px;margin-bottom:56px}
 .mq-mark{width:112px}
 .mq-nuu{width:164px}
 .mq-ved{width:140px}
-.mq-tine{width:240px}
+.mq-tine{width:340px}
 .mq-husq{width:90px}
 
 .mq-mn img{transform:translateY(-7px)}
@@ -233,7 +233,7 @@ max-width:900px;margin-bottom:56px}
   .mq-item::after{right:-27px;font-size:18px}
   .mq-lex{width:134px} .mq-mn{width:98px} .mq-seg{width:122px}
   .mq-mark{width:94px} .mq-nuu{width:138px} .mq-ved{width:118px}
-  .mq-tine{width:206px} .mq-husq{width:76px}
+  .mq-tine{width:280px} .mq-husq{width:76px}
   .mq-mn img{transform:translateY(-5px)}
 }
 
@@ -289,21 +289,35 @@ max-width:900px;margin-bottom:56px}
 .sp-grid.sp-grid-3plus1>.sp-c:nth-child(1){--sp-rot:12deg;--sp-base-y:14px;animation-delay:-2.2s}
 .sp-grid.sp-grid-3plus1>.sp-c:nth-child(2){--sp-rot:0deg;--sp-base-y:-18px;z-index:2;animation-delay:0s}
 .sp-grid.sp-grid-3plus1>.sp-c:nth-child(3){--sp-rot:-12deg;--sp-base-y:14px;animation-delay:-5.5s}
-.sp-grid.sp-grid-3plus1>.sp-c.sp-wide{grid-column:1/-1;--sp-rot:0deg;--sp-base-y:0px;animation-delay:-8.2s;
+.sp-grid.sp-grid-3plus1>.sp-c.sp-wide{grid-column:1/-1;--sp-rot:0deg;--sp-base-y:0px;
+  /* Helt platt — ingen tilt, ingen 3D-float, ingen rotation */
+  transform:none!important;animation:none!important;transform-style:flat!important;
   padding:38px 56px;
   display:grid;grid-template-columns:1fr 2.6fr;gap:42px;align-items:center;
   background:
-    linear-gradient(135deg,rgba(212,168,75,.10) 0%,rgba(212,168,75,.03) 50%,rgba(212,168,75,.07) 100%),
+    linear-gradient(135deg,rgba(212,168,75,.07) 0%,rgba(212,168,75,.02) 50%,rgba(212,168,75,.05) 100%),
     var(--brn);
-  border:1px solid rgba(212,168,75,.28);
-  border-top:1px solid rgba(212,168,75,.5);
+  border:1px solid rgba(212,168,75,.22);
   position:relative}
-.sp-grid.sp-grid-3plus1>.sp-c.sp-wide::before{content:'';position:absolute;top:-1px;left:50%;transform:translateX(-50%);
-  width:120px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
 .sp-grid.sp-grid-3plus1>.sp-c.sp-wide .sp-eyebrow{margin-bottom:6px}
 .sp-grid.sp-grid-3plus1>.sp-c.sp-wide h3{font-size:28px;margin-bottom:6px}
 .sp-grid.sp-grid-3plus1>.sp-c.sp-wide .sp-sub{margin-bottom:0}
 .sp-grid.sp-grid-3plus1>.sp-c.sp-wide .sp-body{margin:0}
+
+/* Subtil grå fade-divider mellan 3-raden och Ert upplägg */
+.sp-grid.sp-grid-3plus1>.sp-divider{
+  grid-column:1/-1;
+  height:1px;
+  width:160px;
+  margin:8px auto 0;
+  background:linear-gradient(90deg,transparent 0%,rgba(140,124,108,.35) 45%,rgba(140,124,108,.45) 50%,rgba(140,124,108,.35) 55%,transparent 100%);
+  pointer-events:none;
+  opacity:0;
+  transform:scaleX(.6);
+  transition:opacity .9s var(--ease) .3s,transform .9s cubic-bezier(.16,1,.3,1) .3s
+}
+.sp-grid.sp-grid-3plus1>.sp-divider.in,
+.in .sp-grid.sp-grid-3plus1>.sp-divider{opacity:1;transform:scaleX(1)}
 @media(max-width:780px){
   .sp-grid.sp-grid-3plus1{grid-template-columns:1fr;perspective:none}
   .sp-grid.sp-grid-3plus1>.sp-c.sp-wide{grid-template-columns:1fr;padding:28px 22px;gap:14px}
@@ -815,6 +829,8 @@ position:relative;overflow:hidden;transition:color .35s}
         <p class="sp-body">Drain-plattorna fylls inte med gräs som de brukar &mdash; utan med taklök i olika sorter. En låg, levande mosaik som tål att beträdas och blir vackrare med åren. Filmen visar planteringen, närbilder på rosetterna mot betongen, och hur ytan förändras från skarp grafisk till mjuk vegetation. En teknisk produkt som blir trädgårdsestetik.</p>
         <span class="sp-tag">Gräsarmering &middot; Taklök &middot; Mosaik</span>
       </div>
+
+      <div class="sp-divider rv" aria-hidden="true"></div>
 
       <div class="sp-c sp-wide rv d4">
         <div>
